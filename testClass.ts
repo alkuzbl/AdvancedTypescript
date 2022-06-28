@@ -101,3 +101,73 @@
 //     // set and get только синхронные методы
 //     // если к примеру нужно работать с password, лучше использовать обычный метод
 // }
+
+//implements
+// interface ILogger {
+//     log(...args: any[]): void;
+//
+//     error(...args: any[]): void;
+// }
+//
+// class Logger implements ILogger {
+//     error(...args: any[]): void {
+//         console.log(...args)
+//     }
+//
+//     log(...args: any[]): void {
+//         console.log(...args)
+//     }
+//
+// }
+
+//наследование и переопределение методов
+// enum PaymentStatus {
+//     new, paid
+// }
+//
+// class Payment {
+//     id: number;
+//     status: PaymentStatus = PaymentStatus.new;
+//
+//     constructor(id: number) {
+//         this.id = id;
+//     }
+//
+//     pay() {
+//         this.status = PaymentStatus.paid
+//     }
+// }
+//
+// class PersistedPayment extends Payment {
+//     paidAt: Date;
+//     dataBaseId: number;
+//
+//     constructor() {
+//         super(id);
+//         const id = Math.random()
+//     }
+//
+//     save() {
+//         //некая логика
+//     }
+//
+//     // переопределение метода
+//     // pay(date?: Date) {
+//     //     // в случае изменения в родительском классе здесь ничего менять не нужно
+//     //     super.pay();
+//     //     if (date) {
+//     //         this.paidAt = date
+//     //     }
+//     //
+//     // }
+//
+//     //override - помогает нам понять, что метод переопределен при чтении кода
+//    override pay(date?: Date) {
+//         // в случае изменения в родительском классе здесь ничего менять не нужно
+//         super.pay();
+//         if (date) {
+//             this.paidAt = date
+//         }
+//
+//     }
+// }
