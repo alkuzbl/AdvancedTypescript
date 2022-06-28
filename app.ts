@@ -27,7 +27,7 @@ const info: Info = {
 const skills: string [] = ['aaa', 'bbbb']
 
 // tuples
-const skill: [number, string] = [1, 'dev']
+const skill: [number, string] = [1, 'dev',]
 
 //enum
 enum StatusCode {
@@ -82,3 +82,84 @@ async function getFaqs(req: RequestTestType): Promise<ResponseTestType> {
 }
 
 
+function test(param?: string) {
+    //     const t = param !== null && param !== void 0 ? param : 'test';
+    const t = param ?? 'test'
+    return t
+}
+
+
+function test2(param?: string) {
+    //     const t = param || 'test';
+    const t = param || 'test'
+    return t
+}
+
+// Запрос в виде платежа
+ enum PaymentStatus {
+    SUCCESS = 'success',
+    FAILED = 'failed'
+}
+
+interface IPayment {
+    sum: number,
+    from: number,
+    to: number
+}
+
+interface IPaymentRequest extends IPayment {
+}
+
+interface IDataSuccess extends IPayment {
+    databaseId: number
+}
+
+interface IDataFailed {
+    errorMessage: string;
+    errorCode: number;
+}
+
+interface IResPaymentSuccess {
+    status: PaymentStatus.SUCCESS;
+    data: IDataSuccess
+}
+
+interface IResPaymentFailed {
+    status: PaymentStatus.FAILED;
+    data: IDataFailed
+}
+
+// Type Guard
+function isPaymentSuccess(x: IResPaymentSuccess | IResPaymentFailed): x is IResPaymentSuccess {
+    return x.status === PaymentStatus.SUCCESS
+}
+
+const testRes = (res: IResPaymentSuccess | IResPaymentFailed) => {
+    if (isPaymentSuccess(res)) {
+        return res.data.databaseId
+    }
+     throw new Error(res.data.errorMessage)
+}
+
+
+
+// типизация unknown
+const getUser = () => {
+    try {
+    } catch (error: unknown) {
+
+        if(error instanceof Error){
+            return error.message
+        }
+    }
+}
+
+const getUser2 = () => {
+    try {
+    } catch (error: unknown) {
+
+        const err = error as Error
+        return err.message
+
+    }
+}
